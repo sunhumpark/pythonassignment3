@@ -1,0 +1,67 @@
+"""
+Functions for calculating and displaying student grades.
+"""
+
+
+def calculate_student_grade():
+    """
+    Ask the user for student name and subject scores,
+    calculate total, average, and letter grade.
+
+    Returns:
+        str: A formatted string like:
+             "Name | Total: ... | Average: ... | Grade: ..."
+    """
+    name = input("Student name: ")
+    count = int(input("Number of subjects: "))
+
+    marks = []
+
+    # Enter scores for each subject
+    for i in range(count):
+        score = float(input(f"Score for subject {i + 1}: "))
+        marks.append(score)
+
+    # Calculate total score
+    total = 0
+    for m in marks:
+        total += m
+
+    # Calculate average
+    average = total / count
+
+    # Grade rules
+    if average >= 90:
+        grade = "A"
+    elif average >= 80:
+        grade = "B"
+    elif average >= 70:
+        grade = "C"
+    elif average >= 60:
+        grade = "D"
+    else:
+        grade = "F"
+
+    # Configure string in a format to be saved
+    result = f"{name} | Total: {total} | Average: {average:.2f} | Grade: {grade}"
+
+    print("\n=== Result ===")
+    print(result)
+
+    return result
+
+
+def view_records(records):
+    """
+    Show all saved grade records.
+
+    Args:
+        records (list[str]): List of saved record strings.
+    """
+    print("\n--- Saved Records ---")
+
+    if len(records) == 0:
+        print("No records found.")
+    else:
+        for i in range(len(records)):
+            print(records[i])
