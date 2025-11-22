@@ -1,0 +1,55 @@
+"""
+Student Grade Calculator
+Names: Geonhoo Park, Sunhum Park, Adetoun Janet Adewusi
+
+Program Description:
+This is a program that calculates the total score, average, and grade
+by entering the student's name and subject scores. It also saves
+and loads grade records from a text file.
+
+How to Run:
+    python main.py
+"""
+
+from file_handler import load_records, save_records
+from grade_calc import calculate_student_grade, view_records
+
+
+def main():
+    """
+    Main menu loop for the Student Grade Calculator.
+    """
+    # Load existing records from file at the start
+    records = load_records()
+
+    while True:
+        print("\n--- Student Grade Calculator ---")
+        print("1. Enter new student grades")
+        print("2. View saved records")
+        print("3. Exit")
+
+        choice = input("Choose: ")
+
+        if choice == "1":
+            # Calculate grade for a new student
+            result = calculate_student_grade()
+            # Add to in-memory list
+            records.append(result)
+            # Save all records to file
+            save_records(records)
+
+        elif choice == "2":
+            # Show all saved records
+            view_records(records)
+
+        elif choice == "3":
+            print("Goodbye!")
+            break
+
+        else:
+            print("Invalid option. Try again.")
+
+
+# Standard Python entry point
+if __name__ == "__main__":
+    main()
