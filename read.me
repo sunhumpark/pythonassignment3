@@ -1,0 +1,79 @@
+""" Student Grade Calculator Name: Geonhoo Park, Sunhum Park, Adetoun Janet Adewusi
+
+Program Description: This is a code that calculates the total score, average, and grade by entering the student's name and subject score.
+
+How to Run: python main.py """ import os
+
+FILE_NAME = "grades.txt"
+
+Function to load saved grade records
+def load_records(): records = [] if os.path.exists(FILE_NAME): with open(FILE_NAME, "r") as file: for line in file: records.append(line.strip()) return records
+
+Function to save the grade record to a file
+def save_records(records): with open(FILE_NAME, "w") as file: for r in records: file.write(r + "\n")
+
+Student grade calculation function
+def calculate_student_grade(): name = input("Student name: ") count = int(input("Number of subjects: "))
+
+marks = []
+
+# Enter score
+for i in range(count):
+    score = float(input(f"Score for subject {i+1}: "))
+    marks.append(score)
+
+# Calculate total score
+total = 0
+for m in marks:
+    total += m
+
+average = total / count
+
+# Credit requirements
+if average >= 90:
+    grade = "A"
+elif average >= 80:
+    grade = "B"
+elif average >= 70:
+    grade = "C"
+elif average >= 60:
+    grade = "D"
+    grade = "D"
+else:
+    grade = "F"
+
+# Configure strings in a format to be saved
+result = f"{name} | Total: {total} | Average: {average:.2f} | Grade: {grade}"
+
+print("\n=== Result ===")
+print(result)
+
+return result
+Function to show all saved records
+def view_records(records): print("\n--- Saved Records ---") if len(records) == 0: print("No records found.") else: for i in range(len(records)): print(records[i])
+
+def main(): # Load existing records records = load_records()
+
+while True:
+    print("\n--- Student Grade Calculator ---")
+    print("1. Enter new student grades")
+    print("2. View saved records")
+    print("3. Exit")
+
+    choice = input("Choose: ")
+
+    if choice == "1":
+        result = calculate_student_grade()
+        records.append(result)
+        save_records(records)
+
+    elif choice == "2":
+        view_records(records)
+
+    elif choice == "3":
+        print("Goodbye!")
+        break
+
+    else:
+        print("Invalid option. Try again.")
+if name == "main": main()
